@@ -1,4 +1,6 @@
-    public interface IStack <T> {
+package model;
+
+public interface IStack <T> {
 
         public boolean isEmpty();
 

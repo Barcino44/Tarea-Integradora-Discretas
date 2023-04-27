@@ -1,3 +1,5 @@
+package model;
+
 public interface IQueue<T> {
     public boolean isEmpty();
     public void enqueue(T value);

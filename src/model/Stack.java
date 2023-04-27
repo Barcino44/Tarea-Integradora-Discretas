@@ -1,3 +1,5 @@
+package model;
+
 public class Stack <T> implements IStack<T> {
 
     private Node<T> first; //Representa el primer elemento de la pila

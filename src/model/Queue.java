@@ -1,3 +1,5 @@
+package model;
+
 public class Queue<T> implements  IQueue<T>{
     private Node<T> first;
     private Node<T> last;
