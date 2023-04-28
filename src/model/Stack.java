@@ -1,4 +1,5 @@
 package model;
+import Exception.StackException;
 
 public class Stack <T> implements IStack<T> {
 
@@ -13,9 +14,13 @@ public class Stack <T> implements IStack<T> {
     }
 
     @Override
-    public T top(){ //Me retorna el primer elemento de la pila
+    public T top() throws StackException{ //Me retorna el primer elemento de la pila
+        if(isEmpty()){
+            throw new StackException();
+        }
         return first.getValue();
     }
+
 
     @Override
     public void push(T obj) {
@@ -24,10 +29,11 @@ public class Stack <T> implements IStack<T> {
         first = node; //El nodo entrante es el primero// first -> Otro nodo random
     }
     @Override
-    public T pop() {
-        Node<T> node = first; //Como elimino el primer elemento, guardo su nodo en una variable.
+    public void pop() throws StackException{ //Me retorna el primer elemento de la pila
+        if(isEmpty()){
+            throw new StackException();
+        }
         first = first.getNext(); //Cuando reasigno, borro, nada me queda apuntando al nodo que antes era el primero.
-        return node.getValue(); //Retorno el valor del nodo que borre (es posible ya que lo guarde en una variable)
     }
 }
 

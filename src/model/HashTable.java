@@ -1,6 +1,7 @@
 package model;
+import Exception.*;
 
-public class HashTable<K,T> implements IHashTable<K,T> {
+public class HashTable<K extends Comparable<K>, T> implements IHashTable<K,T> {
     public static final int arr_size = 127;
     private HNode<K, T>[] hnodes;
 
@@ -9,9 +10,14 @@ public class HashTable<K,T> implements IHashTable<K,T> {
     }
 
     public int hash(K key) {
-        int hashkey;
-        hashkey = key.hashCode() % arr_size;
-        return hashkey;
+        String hashkey;
+        hashkey = key.toString();
+        int result = 0;
+        for (int x = 0; x < hashkey.length(); x++){
+            result += hashkey.codePointAt(x)*128*Math.exp(x);
+        }
+        result=result%arr_size;
+        return result;
     }
 
     @Override
@@ -19,18 +25,25 @@ public class HashTable<K,T> implements IHashTable<K,T> {
         int position = hash(key);
         HNode<K, T> node = new HNode<>(key, value);
         if (hnodes[position] != null) {
-            HNode<K, T> node2 = hnodes[position];
-            node.setNext(node2);
-            hnodes[position] = node;
+            HNode<K,T> current = hnodes[position];
+            boolean flag=true;
+            while(flag){
+                if(current.getNext()==null){
+                    current.setNext(node);
+                    flag=false;
+                }
+                else{
+                    current=current.getNext();
+                }
+            }
         } else {
             hnodes[position] = node;
         }
     }
 
     @Override
-    public T search(K key) {
+    public T search(K key) throws PassengerNotFoundException {
         int position = hash(key);
-        System.out.println(position);
         T object = null;
         HNode<K, T> node = hnodes[position];
         boolean flag = true;
@@ -43,6 +56,9 @@ public class HashTable<K,T> implements IHashTable<K,T> {
                     node = node.getNext();
                 }
             }
+        }
+        if (object==null){
+            throw new PassengerNotFoundException();
         }
         return object;
     }

@@ -1,4 +1,5 @@
 package model;
+import Exception.QueueException;
 
 public class Queue<T> implements  IQueue<T>{
     private Node<T> first;
@@ -20,11 +21,12 @@ public class Queue<T> implements  IQueue<T>{
         }
     }
     @Override
-    public T front() {
+    public T front() throws QueueException{
+        if(isEmpty()) throw new QueueException();
         return first.getValue();
     }
     @Override
-    public T dequeue() {
+    public T dequeue() throws QueueException {
         if(!isEmpty()) {
             Node<T> aux = first;
             if (first == last) {
@@ -36,7 +38,11 @@ public class Queue<T> implements  IQueue<T>{
             return aux.getValue();
         }
         else{
-            return null;
+            throw new QueueException();
         }
+    }
+    public Node<T> getLast() throws QueueException{
+        if(isEmpty()) throw new QueueException();
+        return last;
     }
 }

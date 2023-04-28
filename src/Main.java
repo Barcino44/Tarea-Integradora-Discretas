@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    static AirLine arline = new AirLine();
+    static AirLine airline = new AirLine();
     public static void main(String[] args) throws IOException {
         Scanner reader = new Scanner(System.in);
         while (true) {
@@ -12,7 +12,8 @@ public class Main {
             int option = Integer.parseInt(reader.nextLine());
             switch (option) {
                 case 1:
-                    arline.loadDataBase();
+                    airline.loadPlane();
+                    airline.loadDataBase();
                     break;
 
             }
