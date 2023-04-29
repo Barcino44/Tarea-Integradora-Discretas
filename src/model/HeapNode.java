@@ -2,10 +2,10 @@ package model;
 
 public class HeapNode <T> implements Comparable<HeapNode <T>>  {
     private T value;
-    private int key;
+    private double key;
     private HeapNode<T> next;
 
-    public HeapNode(int key,T value) {
+    public HeapNode(double key,T value) {
         this.value = value;
         this.next = null;
         this.key=key;
@@ -27,11 +27,11 @@ public class HeapNode <T> implements Comparable<HeapNode <T>>  {
         this.next = next;
     }
 
-    public int getKey() {
+    public double getKey() {
         return key;
     }
 
-    public void setKey(int key) {
+    public void setKey(double key) {
         this.key = key;
     }
     @Override

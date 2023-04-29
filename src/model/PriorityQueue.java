@@ -9,7 +9,7 @@ public class PriorityQueue<T> implements IPriorityQueue<T> {
     }
 
     @Override
-    public void insert(T obj, int key) throws Exception {
+    public void insert(T obj, double key) throws Exception {
         heap.insertPassenger(obj, key);
     }
     @Override

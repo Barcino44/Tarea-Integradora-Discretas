@@ -52,8 +52,8 @@ public class Heap<T> implements IHeap<T>{
         return rightC-1;
     }
     @Override
-    public void insertPassenger(T passenger,int key) throws Exception{
-        HeapNode<T> node = new HeapNode<>(Integer.MIN_VALUE, passenger);
+    public void insertPassenger(T passenger,double key) throws Exception{
+        HeapNode<T> node = new HeapNode<>(Double.MIN_VALUE, passenger);
         if(heapSize != heapA.length){
             heapA [heapSize] = node;
             increaseKey(heapSize, key);
@@ -64,7 +64,7 @@ public class Heap<T> implements IHeap<T>{
     }
 
     @Override
-    public void increaseKey(int i, int key) {
+    public void increaseKey(int i, double key) {
         if(key<heapA[i].getKey()){
             System.out.println("Error new key is smaller");
         }else{
@@ -87,7 +87,7 @@ public class Heap<T> implements IHeap<T>{
     }
     @Override
     public T extract() throws Exception {
-        if (heapA[0] == null) {
+        if (getHeapsize()==0) {
             throw new Exception("You cannot extract, queue empty");
         } else {
             HeapNode<T> node = heapA[0];

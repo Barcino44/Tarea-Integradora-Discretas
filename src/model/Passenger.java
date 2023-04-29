@@ -1,5 +1,7 @@
 package model;
 
+import java.text.DecimalFormat;
+
 public class Passenger{
     private String id;
     private String name;
@@ -72,25 +74,26 @@ public class Passenger{
             return false;
         }
     }
-    public int priortyFirstClass(){
-        double totalPriorty=plane.getRows()+1;
+    public double priortyFirstClass(){
+        int totalPriorty=plane.getRows()+1;
             if (miles>800){
-                totalPriorty+=2.;
+                totalPriorty+=1;
             }
             if (age>50){
                 totalPriorty+=2;
-            }                                       //Numero total de sillas
-        return (int) (totalPriorty+Math.abs((entryOrder/(plane.getChairsByRows()* plane.getRows())-1)));
+            }
+        return totalPriorty;
     }
-    public int priortyStandarClass(){
+    public double priortyStandarClass(){
         return this.row;
     }
-    public int priorty(){
-        if(isFirstClass()){
-            return priortyFirstClass();
+    public double priorty(){                                                   //Numero de sillas
+        double entryOrder=Math.abs((((double) this.entryOrder / ((double) plane.getChairsByRows() * plane.getRows()))-1));
+        if(isFirstClass()) {
+            return priortyFirstClass()+entryOrder;
         }
         else{
-            return priortyStandarClass();
+            return priortyStandarClass()+entryOrder;
         }
     }
     @Override
@@ -101,7 +104,7 @@ public class Passenger{
                 ", miles=" + miles +
                 ", age=" + age +
                 ", entryOrder=" + entryOrder +
-                ", priorty=" + priorty()+
+                ", priorty=" + Math.round(priorty())+
                 ", row=" + row+
                 '}';
     }

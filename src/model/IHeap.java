@@ -10,9 +10,9 @@ public interface IHeap<T> {
 
     public int rightChild(int i);
 
-    public void increaseKey(int i, int key);
+    public void increaseKey(int i, double key);
 
-    public void insertPassenger(T t, int key) throws Exception;
+    public void insertPassenger(T t, double key) throws Exception;
 
     public T getRoot() throws Exception;
 
