@@ -14,13 +14,13 @@ public class AirLineTest {
 
     }
     @Test
-    public void ValidateifDataBaseLoadInHT() throws IOException {
+    public void validateifDataBaseLoadInHT() throws IOException {
         //Arrange
         setup1();
         //Act
         airline.loadDataBase();
         //Assert
-        assertEquals(airline.passengers.search("80249").getName(),"Ana");
+        assertEquals(airline.HTpassengers.search("80249").getName(),"Ana");
     }
     @Test
     public void validateThatPassengerIsnotInHT() {
@@ -30,7 +30,7 @@ public class AirLineTest {
         //Act
         try {
             airline.loadDataBase();
-            airline.passengers.search("6451");
+            airline.HTpassengers.search("6451");
             result=true;
         } catch (PassengerNotFoundException ex) {
             ex.printStackTrace();

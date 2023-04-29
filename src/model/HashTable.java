@@ -19,7 +19,6 @@ public class HashTable<K extends Comparable<K>, T> implements IHashTable<K,T> {
         result=result%arr_size;
         return result;
     }
-
     @Override
     public void insert(K key, T value) {
         int position = hash(key);

@@ -7,7 +7,7 @@ public interface IStack <T> {
 
         public T top() throws StackException;
 
-        public void push(T obj);
+        public void push(T value);
 
         public void pop() throws StackException;
 }

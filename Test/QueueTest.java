@@ -1,4 +1,5 @@
 import model.Passenger;
+import model.Plane;
 import model.Queue;
 import model.Stack;
 import org.junit.Test;
@@ -8,15 +9,15 @@ import static org.junit.Assert.*;
 
 public class QueueTest {
     Queue<Passenger> queue = new Queue<>();
-
+    static Plane plane = new Plane("Aereo",15,4,6);
     public void setup1() {
 
     }
 
     public void setup2() {
-        queue.enqueue(new Passenger("56453", "Javier"));
-        queue.enqueue(new Passenger("98486", "Lina"));
-        queue.enqueue(new Passenger("34636", "Daniel"));
+        queue.enqueue(new Passenger("56453", "Javier",5461,65,plane,10));
+        queue.enqueue(new Passenger("98486", "Lina",4865,18,plane,1));
+        queue.enqueue(new Passenger("34636", "Daniel",1654,25,plane,3));
     }
 
     @Test
@@ -31,7 +32,7 @@ public class QueueTest {
         //Arrange
         setup2();
         //Act
-        queue.enqueue(new Passenger("65462","Manuel"));
+        queue.enqueue(new Passenger("65462","Manuel",6555,47,plane,18));
         //Assert
         assertEquals(queue.getLast().getValue().getName(),"Manuel");
     }
