@@ -14,17 +14,17 @@ public class AirLineTest {
     public void setupStage1() {
 
     }
-    public void setupStage2(){
-        airline.HTpassengers.insert("46514",new Passenger("46514","Alejandro",642,40,plane,4));
-        airline.HTpassengers.insert("64844",new Passenger("64844","Laura",770,19,plane,8));
-        airline.HTpassengers.insert("18070",new Passenger("18070","Andres",642,22,plane,28));
+    public void setupStage2() throws Exception {
+        airline.HTpassengers.insert("46514",new Passenger("46514","Alejandro",642,40,plane,4),plane.getRows()*plane.getChairsByRows());
+        airline.HTpassengers.insert("64844",new Passenger("64844","Laura",770,19,plane,8),plane.getRows()*plane.getChairsByRows());
+        airline.HTpassengers.insert("18070",new Passenger("18070","Andres",642,22,plane,28),plane.getRows()*plane.getChairsByRows());
     }
     public void setupStage3() throws Exception {
         //Inserting passengers in HT
-        airline.HTpassengers.insert("94864",new Passenger("94864","Yeison",645,19,plane,4));
-        airline.HTpassengers.insert("65244",new Passenger("65244","Daniel",564,20,plane,8));
-        airline.HTpassengers.insert("94848",new Passenger("94848","Alejandra",461,32,plane,8));
-        airline.HTpassengers.insert("94474",new Passenger("94474","Cristian",564,44,plane,7));
+        airline.HTpassengers.insert("94864",new Passenger("94864","Yeison",645,19,plane,4),plane.getRows()*plane.getChairsByRows());
+        airline.HTpassengers.insert("65244",new Passenger("65244","Daniel",564,20,plane,8),plane.getRows()*plane.getChairsByRows());
+        airline.HTpassengers.insert("94848",new Passenger("94848","Alejandra",461,32,plane,8),plane.getRows()*plane.getChairsByRows());
+        airline.HTpassengers.insert("94474",new Passenger("94474","Cristian",564,44,plane,7),plane.getRows()*plane.getChairsByRows());
         //Searching passengers in HT
         Passenger passenger1=airline.HTpassengers.search("94864");
         Passenger passenger2=airline.HTpassengers.search("65244");
@@ -39,13 +39,24 @@ public class AirLineTest {
         airline.PQpassengers.insert(passenger3,passenger3.priorty());
     }
     @Test
-    public void validateifDataBaseisLoadInHT() throws IOException {
+    public void validateifDataBaseisLoadInHT() throws Exception {
         //Arrange
         setupStage1();
         //Act
+        airline.loadPlane();
         airline.loadDataBase();
         //Assert
         assertEquals(airline.HTpassengers.search("80249").getName(),"Ana");
+    }
+    @Test
+    public void validateifIsLoadedAPassengerThatNumberOfRowIsNotInPlane() throws Exception {
+        //Arrange
+        setupStage1();
+        //Act
+        airline.loadPlane();
+        airline.loadDataBase();
+        //Assert
+        assertNull(airline.HTpassengers.search("74512"));
     }
     @Test
     public void validateIfPlaneIsLoaded() throws IOException {
@@ -57,7 +68,7 @@ public class AirLineTest {
         assertEquals(airline.thePlane.getName(),"Barcino'sPlane");
     }
     @Test
-    public void validateThatPassengerIsinHT(){
+    public void validateThatPassengerIsinHT() throws Exception {
         //Arrange
         setupStage2();
         //Act
@@ -66,7 +77,7 @@ public class AirLineTest {
         assertEquals(thePassenger.getName(),"Andres");
     }
     @Test
-    public void validateThatPassengerIsnotInHT() {
+    public void validateThatPassengerIsnotInHT() throws Exception {
         boolean result=false;
         //Arrange
         setupStage2();

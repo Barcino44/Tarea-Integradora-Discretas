@@ -4,7 +4,8 @@ import Exception.*;
 public class HashTable<K extends Comparable<K>, T> implements IHashTable<K,T> {
     public static final int arr_size = 127;
     private HNode<K, T>[] hnodes;
-
+    private Plane plane;
+    static int counterPassengers=0;
     public HashTable() {
         hnodes = (HNode<K, T>[]) new HNode[arr_size];
     }
@@ -20,19 +21,18 @@ public class HashTable<K extends Comparable<K>, T> implements IHashTable<K,T> {
         return result;
     }
     @Override
-    public void insert(K key, T value) {
+    public void insert(K key, T value,int airPlaneCapacity) throws Exception {
         int position = hash(key);
         HNode<K, T> node = new HNode<>(key, value);
         if (hnodes[position] != null) {
-            HNode<K,T> current = hnodes[position];
-            boolean flag=true;
-            while(flag){
-                if(current.getNext()==null){
+            HNode<K, T> current = hnodes[position];
+            boolean flag = true;
+            while (flag) {
+                if (current.getNext() == null) {
                     current.setNext(node);
-                    flag=false;
-                }
-                else{
-                    current=current.getNext();
+                    flag = false;
+                } else {
+                    current = current.getNext();
                 }
             }
         } else {
@@ -48,20 +48,18 @@ public class HashTable<K extends Comparable<K>, T> implements IHashTable<K,T> {
         boolean flag = true;
         if (hnodes[position] != null) {
             while (flag) {
-                if (node.getKey().equals(key)){
+                if (node.getKey().equals(key)) {
                     object = node.getValue();
                     flag = false;
                 } else {
+                    if (node.getNext() == null) {
+                        flag = false;
+                    }
                     node = node.getNext();
                 }
             }
         }
-        if (object==null){
-            throw new PassengerNotFoundException();
-        }
         return object;
     }
-
-
 }
 

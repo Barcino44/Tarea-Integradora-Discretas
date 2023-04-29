@@ -1,6 +1,6 @@
 package model;
 
-import java.text.DecimalFormat;
+import Exception.RowNoExistInPlaneException;
 
 public class Passenger{
     private String id;
@@ -10,15 +10,17 @@ public class Passenger{
     private int entryOrder;
     private int row;
     private Plane plane;
-    public Passenger(String id, String name, int miles, int age, Plane plane, int row) {
+    public Passenger(String id, String name, int miles, int age, Plane plane, int row) throws RowNoExistInPlaneException {
         this.id = id;
         this.name = name;
         this.miles = miles;
         this.age = age;
         this.plane=plane;
         this.row= row;
+        if(this.row> plane.getRows()){
+            throw new RowNoExistInPlaneException();
+        }
     }
-
     public String getId() {
         return id;
     }
@@ -88,7 +90,7 @@ public class Passenger{
         return this.row;
     }
     public double priorty(){                                                   //Numero de sillas
-        double entryOrder=Math.abs((((double) this.entryOrder / ((double) plane.getChairsByRows() * plane.getRows()))-1));
+        double entryOrder=Math.abs((((double) this.entryOrder / 1000.0)-1));
         if(isFirstClass()) {
             return priortyFirstClass()+entryOrder;
         }
@@ -104,7 +106,7 @@ public class Passenger{
                 ", miles=" + miles +
                 ", age=" + age +
                 ", entryOrder=" + entryOrder +
-                ", priorty=" + Math.round(priorty())+
+                ", priorty="+ Math.round(priorty())+
                 ", row=" + row+
                 '}';
     }

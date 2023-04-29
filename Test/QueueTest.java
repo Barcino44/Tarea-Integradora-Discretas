@@ -1,7 +1,7 @@
 import model.Passenger;
 import model.Plane;
 import model.Queue;
-import model.Stack;
+import Exception.RowNoExistInPlaneException;
 import org.junit.Test;
 import Exception.QueueException;
 
@@ -14,30 +14,30 @@ public class QueueTest {
 
     }
 
-    public void setup2() {
+    public void setup2() throws RowNoExistInPlaneException {
         queue.enqueue(new Passenger("56453", "Javier",5461,65,plane,10));
         queue.enqueue(new Passenger("98486", "Lina",4865,18,plane,1));
         queue.enqueue(new Passenger("34636", "Daniel",1654,25,plane,3));
     }
 
     @Test
-    public void validateFront() throws QueueException {
+    public void validateFront() throws Exception {
         //Arrange
         setup2();
         //Act and Assert
         assertEquals(queue.front().getName(), "Javier");
     }
     @Test
-    public void validateEnqueue() throws QueueException {
+    public void validateEnqueue() throws Exception {
         //Arrange
         setup2();
         //Act
-        queue.enqueue(new Passenger("65462","Manuel",6555,47,plane,18));
+        queue.enqueue(new Passenger("65462","Manuel",6555,47,plane,12));
         //Assert
         assertEquals(queue.getLast().getValue().getName(),"Manuel");
     }
     @Test
-    public void validateDequeue() throws QueueException {
+    public void validateDequeue() throws Exception {
         //Arrange
         setup2();
         //Act

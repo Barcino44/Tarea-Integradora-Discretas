@@ -2,6 +2,7 @@ import model.Passenger;
 import model.Plane;
 import model.Stack;
 import Exception.StackException;
+import Exception.RowNoExistInPlaneException;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,20 +13,20 @@ public class StackTest {
     public void setup1() {
 
     }
-    public void setup2(){
+    public void setup2() throws RowNoExistInPlaneException {
         stack.push(new Passenger("56453","Daron",6511,18,plane,6));
         stack.push(new Passenger("98486","José",4755,22,plane,2));
         stack.push(new Passenger("34636", "Dayana",7496,19,plane,12));
     }
     @Test
-    public void validateTopStack() throws StackException {
+    public void validateTopStack() throws StackException, RowNoExistInPlaneException {
         //Arrange
         setup2();
         //Act and Assert
         assertEquals(stack.top().getName(),"Dayana");
     }
     @Test
-    public void valdatePushStack() throws StackException {
+    public void valdatePushStack() throws Exception {
         //Arrange
         setup2();
         //Act
@@ -34,7 +35,7 @@ public class StackTest {
         assertEquals(stack.top().getName(),"Mariana");
     }
     @Test
-    public void validatePopStack() throws StackException {
+    public void validatePopStack() throws Exception {
         //Arrange
         setup2();
         //Act
