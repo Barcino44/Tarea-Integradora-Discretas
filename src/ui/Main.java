@@ -1,3 +1,5 @@
+package ui;
+
 import model.AirLine;
 
 import java.util.Scanner;
@@ -12,35 +14,46 @@ public class Main {
             int option = Integer.parseInt(reader.nextLine());
             switch (option) {
                 case 1:
-                    System.out.println("******************************WARNING***********************************");
-                    System.out.println("***If the row of the user is not in the plane, he could not be loaded***");
+                    System.out.println("********************************WARNING******************************");
+                    System.out.println("     If the row or the seat of the passenger is not in the plane, \n" +
+                            "                       he/she could not be loaded");
                     System.out.println("************************************************************************");
-                    if (!AirLine.loadDataBase) {
+                    if(!AirLine.loadDataBase) {
                         airline.loadPlane();
                         airline.loadDataBase();
                     }
                     System.out.println("The database with info of the passengers and the plane has been loaded!!");
                     break;
                 case 2:
-                    System.out.println("****************************WARNING***********************************");
+                    System.out.println("********************************WARNING******************************");
                     System.out.println("              If the capacity of the plane is reached,\n" +
                             "   just the people with the most priority could enter in the plane");
                     System.out.println("**********************************************************************");
-                    if (!AirLine.registerEntry) {
+                    if(!AirLine.registerEntry) {
                         airline.registerEntry();
                     }
                     System.out.println("The database with the passenger's ID and their arrive order has been loaded!!");
                     break;
                 case 3:
-                    airline.showEntry();
-                    break;
-                case 4:
-                    if (AirLine.registerEntry) {
-                        airline.registerExit();
-                        airline.showOut();
+                    if(AirLine.registerEntry) {
+                        airline.showEntry();
+                        System.out.println(AirLine.EntryOrder);
                     }
                     else{
-                        System.out.println("You have not register the entry yet");
+                        System.out.println("********************************WARNING*********************************");
+                        System.out.println("           The passengers has not been registered");
+                        System.out.println("************************************************************************");
+                    }
+                    break;
+                case 4:
+                    if(AirLine.registerEntry) {
+                        airline.showOut();
+                        System.out.println(AirLine.OutOrder);
+                    }
+                    else {
+                        System.out.println("********************************WARNING*********************************");
+                        System.out.println("              The passengers has not been registered");
+                        System.out.println("************************************************************************");
                     }
                     break;
                 case 0:

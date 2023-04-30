@@ -1,7 +1,6 @@
 package model;
 
 import java.io.*;
-import Exception.*;
 
 public class AirLine {
     static String path = "Data/Base de datos de pasajeros.txt";
@@ -13,6 +12,9 @@ public class AirLine {
     public PriorityQueue<Passenger> PQpassengersIn;
     public PriorityQueue<Passenger> PQpassengersOut;
     public Stack<Passenger> StackpassengerOut;
+
+    public static String EntryOrder="";
+    public static String OutOrder="";
     public Plane thePlane;
 
     public AirLine() {
@@ -31,9 +33,9 @@ public class AirLine {
         String content = "";
         while ((line = reader.readLine()) != null) {
             arr = line.split("::");
-            if (Integer.parseInt(arr[4]) <= thePlane.getRows()) {
+            if (Integer.parseInt(arr[4]) <= thePlane.getRows()&&Integer.parseInt(arr[5])<= thePlane.getChairsByRows()) {
                 HTpassengers.insert(
-                        arr[0], new Passenger(arr[0], arr[1], Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), thePlane, Integer.parseInt(arr[4]),Integer.parseInt(arr[5])), thePlane.getRows() * thePlane.getChairsByRows());
+                        arr[0], new Passenger(arr[0], arr[1], Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), thePlane, Integer.parseInt(arr[4]),Integer.parseInt(arr[5])));
             }
         }
     }
@@ -61,7 +63,8 @@ public class AirLine {
             if (HTpassengers.search(arr[1]) != null) {
                 Passenger thePassenger = HTpassengers.search(arr[1]);
                 thePassenger.setEntryOrder(Integer.parseInt(arr[0]));
-                PQpassengersIn.insert(thePassenger, thePassenger.priorty());
+                PQpassengersIn.insert(thePassenger, thePassenger.priortyEntry());
+                PQpassengersOut.insert(thePassenger,thePassenger.priorityOut());
                 content += line + "\n";
             }
         }
@@ -70,24 +73,7 @@ public class AirLine {
         int counter=0;
         while (PQpassengersIn.getHeapSize() != 0&&thePlane.getChairsByRows()* thePlane.getRows()>counter) {
             counter++;
-            System.out.println(PQpassengersIn.extract().toString());
-        }
-    }
-    public void registerExit() throws Exception {
-        File file = new File(path3);
-        FileInputStream fis = new FileInputStream(file); //Lector
-        BufferedReader reader = new BufferedReader(new InputStreamReader(fis));
-        String line = "";
-        String content = "";
-        String[] arr;
-        while ((line = reader.readLine()) != null) {
-            arr = line.split("::");
-            if (HTpassengers.search(arr[1]) != null) {
-                Passenger thePassenger = HTpassengers.search(arr[1]);
-                thePassenger.setEntryOrder(Integer.parseInt(arr[0]));
-                PQpassengersOut.insert(thePassenger, thePassenger.priorityOut());
-                content += line + "\n";
-            }
+            EntryOrder=EntryOrder+PQpassengersIn.extract().toString()+"\n";
         }
     }
     public void toStack() throws Exception {
@@ -100,7 +86,7 @@ public class AirLine {
     public void showOut() throws Exception {
         toStack();
         while (!StackpassengerOut.isEmpty()) {
-            System.out.println(StackpassengerOut.pop());
+            OutOrder=OutOrder+StackpassengerOut.pop().toString()+"\n";
         }
     }
 }

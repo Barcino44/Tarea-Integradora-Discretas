@@ -1,5 +1,5 @@
 package model;
-
+import Exception.HeapEmptyException;
 public class Heap<T> implements IHeap<T>{
 
     private HeapNode<T> [] heapA;
@@ -69,7 +69,6 @@ public class Heap<T> implements IHeap<T>{
             System.out.println("Error new key is smaller");
         }else{
             heapA[i].setKey(key);
-
             while(i>0 && heapA[parent(i)].getKey()<heapA[i].getKey()){
                 HeapNode<T> node = heapA[parent(i)];
                 heapA[parent(i)] = heapA[i];
@@ -81,14 +80,14 @@ public class Heap<T> implements IHeap<T>{
     @Override
     public T getRoot() throws Exception{
         if(heapA[0] == null){
-            throw new Exception("The queue is empty");
+            throw new HeapEmptyException();
         }else
             return heapA[0].getValue();
     }
     @Override
     public T extract() throws Exception {
         if (getHeapsize()==0) {
-            throw new Exception("You cannot extract, queue empty");
+            throw new HeapEmptyException();
         } else {
             HeapNode<T> node = heapA[0];
             heapA[0] = heapA[heapSize - 1];

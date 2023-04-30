@@ -1,7 +1,6 @@
 import model.Passenger;
 import model.Plane;
 import model.Queue;
-import Exception.RowNoExistInPlaneException;
 import org.junit.Test;
 import Exception.QueueException;
 
@@ -14,10 +13,10 @@ public class QueueTest {
 
     }
 
-    public void setup2() throws RowNoExistInPlaneException {
-        queue.enqueue(new Passenger("56453", "Javier",5461,65,plane,10));
-        queue.enqueue(new Passenger("98486", "Lina",4865,18,plane,1));
-        queue.enqueue(new Passenger("34636", "Daniel",1654,25,plane,3));
+    public void setup2() throws Exception {
+        queue.enqueue(new Passenger("56453", "Javier",5461,65,plane,10,3));
+        queue.enqueue(new Passenger("98486", "Lina",4865,18,plane,1,4));
+        queue.enqueue(new Passenger("34636", "Daniel",1654,25,plane,3,2));
     }
 
     @Test

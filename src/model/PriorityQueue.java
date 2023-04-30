@@ -19,4 +19,7 @@ public class PriorityQueue<T> implements IPriorityQueue<T> {
     public int getHeapSize(){
         return heap.getHeapsize();
     }
+    public T getRoot() throws Exception {
+        return heap.getRoot();
+    }
 }

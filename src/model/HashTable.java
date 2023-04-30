@@ -4,7 +4,6 @@ import Exception.*;
 public class HashTable<K extends Comparable<K>, T> implements IHashTable<K,T> {
     public static final int arr_size = 127;
     private HNode<K, T>[] hnodes;
-    private Plane plane;
     public HashTable() {
         hnodes = (HNode<K, T>[]) new HNode[arr_size];
     }
@@ -20,7 +19,7 @@ public class HashTable<K extends Comparable<K>, T> implements IHashTable<K,T> {
         return result;
     }
     @Override
-    public void insert(K key, T value,int airPlaneCapacity) throws Exception {
+    public void insert(K key, T value) {
         int position = hash(key);
         HNode<K, T> node = new HNode<>(key, value);
         if (hnodes[position] != null) {
@@ -38,7 +37,6 @@ public class HashTable<K extends Comparable<K>, T> implements IHashTable<K,T> {
             hnodes[position] = node;
         }
     }
-
     @Override
     public T search(K key) {
         int position = hash(key);
@@ -57,6 +55,9 @@ public class HashTable<K extends Comparable<K>, T> implements IHashTable<K,T> {
                     node = node.getNext();
                 }
             }
+        }
+        if (object==null){
+            throw new PassengerNotFoundException();
         }
         return object;
     }
