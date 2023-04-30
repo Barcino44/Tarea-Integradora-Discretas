@@ -34,6 +34,15 @@ public class Main {
                 case 3:
                     airline.showEntry();
                     break;
+                case 4:
+                    if (AirLine.registerEntry) {
+                        airline.registerExit();
+                        airline.showOut();
+                    }
+                    else{
+                        System.out.println("You have not register the entry yet");
+                    }
+                    break;
                 case 0:
                     System.exit(0);
                     break;

@@ -29,11 +29,13 @@ public class Stack <T> implements IStack<T> {
         first = node; //El nodo entrante es el primero// first -> Otro nodo random
     }
     @Override
-    public void pop() throws StackException{ //Me retorna el primer elemento de la pila
+    public T pop() throws StackException{ //Me retorna el primer elemento de la pila
         if(isEmpty()){
             throw new StackException();
         }
+        Node<T> node =first;
         first = first.getNext(); //Cuando reasigno, borro, nada me queda apuntando al nodo que antes era el primero.
+        return node.getValue();
     }
 }
 

@@ -32,7 +32,7 @@ public class QueueTest {
         //Arrange
         setup2();
         //Act
-        queue.enqueue(new Passenger("65462","Manuel",6555,47,plane,12));
+        queue.enqueue(new Passenger("65462","Manuel",6555,47,plane,12,4));
         //Assert
         assertEquals(queue.getLast().getValue().getName(),"Manuel");
     }

@@ -9,8 +9,9 @@ public class Passenger{
     private int age;
     private int entryOrder;
     private int row;
+    private int seat;
     private Plane plane;
-    public Passenger(String id, String name, int miles, int age, Plane plane, int row) throws RowNoExistInPlaneException {
+    public Passenger(String id, String name, int miles, int age, Plane plane, int row,int seat) throws RowNoExistInPlaneException {
         this.id = id;
         this.name = name;
         this.miles = miles;
@@ -20,6 +21,7 @@ public class Passenger{
         if(this.row> plane.getRows()){
             throw new RowNoExistInPlaneException();
         }
+        this.seat=seat;
     }
     public String getId() {
         return id;
@@ -65,6 +67,14 @@ public class Passenger{
         this.row = row;
     }
 
+    public int getSeat() {
+        return seat;
+    }
+
+    public void setSeat(int seat) {
+        this.seat = seat;
+    }
+
     public void setEntryOrder(int entryOrder) {
         this.entryOrder = entryOrder;
     }
@@ -89,8 +99,8 @@ public class Passenger{
     public double priortyStandarClass(){
         return this.row;
     }
-    public double priorty(){                                                   //Numero de sillas
-        double entryOrder=Math.abs((((double) this.entryOrder / 1000.0)-1));
+    public double priorty(){
+        double entryOrder=Math.abs((((double) this.entryOrder / 1000)-1));
         if(isFirstClass()) {
             return priortyFirstClass()+entryOrder;
         }
@@ -108,6 +118,18 @@ public class Passenger{
                 ", entryOrder=" + entryOrder +
                 ", priorty="+ Math.round(priorty())+
                 ", row=" + row+
+                ", seat="+ seat+
+                ", priorityOut="+priorityOut()+
                 '}';
+    }
+    public double priorityOut(){
+        int totalPriority=Math.abs(this.seat - plane.getChairsByRows()/2);
+        if(plane.getChairsByRows()%2==0){
+            if(this.seat>plane.getChairsByRows()/2) {
+                totalPriority = totalPriority -1;
+            }
+        }
+        return this.row+Math.abs(((double)totalPriority/100)-1)+Math.abs((((double) this.entryOrder / 1000)-1));
+          //filas                    //silla                        //Orden de llegada
     }
 }

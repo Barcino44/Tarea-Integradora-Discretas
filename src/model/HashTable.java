@@ -5,7 +5,6 @@ public class HashTable<K extends Comparable<K>, T> implements IHashTable<K,T> {
     public static final int arr_size = 127;
     private HNode<K, T>[] hnodes;
     private Plane plane;
-    static int counterPassengers=0;
     public HashTable() {
         hnodes = (HNode<K, T>[]) new HNode[arr_size];
     }
@@ -41,7 +40,7 @@ public class HashTable<K extends Comparable<K>, T> implements IHashTable<K,T> {
     }
 
     @Override
-    public T search(K key) throws PassengerNotFoundException {
+    public T search(K key) {
         int position = hash(key);
         T object = null;
         HNode<K, T> node = hnodes[position];

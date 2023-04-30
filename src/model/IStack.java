@@ -9,5 +9,5 @@ public interface IStack <T> {
 
         public void push(T value);
 
-        public void pop() throws StackException;
+        public T pop() throws StackException;
 }
