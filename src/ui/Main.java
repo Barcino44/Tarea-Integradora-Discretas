@@ -29,7 +29,7 @@ public class Main {
                     System.out.println("              If the capacity of the plane is reached,\n" +
                             "   just the people with the most priority could enter in the plane");
                     System.out.println("**********************************************************************");
-                    if(!AirLine.registerEntry) {
+                    if(!AirLine.registerEntry&&AirLine.loadDataBase) {
                         airline.registerEntry();
                     }
                     System.out.println("The database with the passenger's ID and their arrive order has been loaded!!");
