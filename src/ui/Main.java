@@ -15,7 +15,7 @@ public class Main {
             switch (option) {
                 case 1:
                     System.out.println("********************************WARNING******************************");
-                    System.out.println("     If the row or the seat of the passenger is not in the plane, \n" +
+                    System.out.println("    -If the row or the seat of the passenger is not in the plane, \n" +
                             "                       he/she could not be loaded");
                     System.out.println("************************************************************************");
                     if(!AirLine.loadDataBase) {

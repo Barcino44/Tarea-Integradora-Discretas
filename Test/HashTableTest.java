@@ -14,9 +14,9 @@ public class HashTableTest {
     }
 
     public void setup2() throws Exception {
-        hashTable.insert("56453", new Passenger("56453", "Javier",5461,65,plane,10,3));
-        hashTable.insert("98486",new Passenger("98486", "Lina",4865,18,plane,1,4));
-        hashTable.insert("38636",new Passenger("34636", "Daniel",1654,25,plane,3,2));
+        hashTable.insert("65684", new Passenger("65684", "Esteban",1231,52,plane,10,4));
+        hashTable.insert("84935",new Passenger("84935", "Felipe",2686,16,plane,2,1));
+        hashTable.insert("49884",new Passenger("49884", "Sergio",4636,43,plane,9,2));
     }
     @Test
     public void insertPassengerInHT() throws Exception{
@@ -31,7 +31,7 @@ public class HashTableTest {
         //Arrange
         setup2();
         //Act and Assert
-        assertEquals(hashTable.search("56453").getName(),"Javier");
+        assertEquals(hashTable.search("65684").getName(),"Esteban");
     }
     @Test
     public void searchingPassengerThatIsnotInHT(){

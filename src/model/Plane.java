@@ -3,13 +3,13 @@ package model;
 public class Plane{
     private String name;
     private int rows;
-    private int chairsByRows;
+    private int seatsByRows;
     private int firstClassRows;
 
-    public Plane(String name, int rows, int chairsByRows, int firstClassRows) {
+    public Plane(String name, int rows, int seatsByRows, int firstClassRows) {
         this.name = name;
         this.rows = rows;
-        this.chairsByRows = chairsByRows;
+        this.seatsByRows = seatsByRows;
         this.firstClassRows = firstClassRows;
     }
 
@@ -29,12 +29,12 @@ public class Plane{
         this.rows = rows;
     }
 
-    public int getChairsByRows() {
-        return chairsByRows;
+    public int getSeatsByRows() {
+        return seatsByRows;
     }
 
-    public void setChairsByRows(int chairsByRows) {
-        this.chairsByRows = chairsByRows;
+    public void setseatsByRows(int seatsByRows) {
+        this.seatsByRows = seatsByRows;
     }
 
     public int getFirstClassRows() {

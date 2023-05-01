@@ -24,7 +24,7 @@ public class Passenger {
             throw new RowNoExistInPlaneException();
         }
         this.seat = seat;
-        if (this.seat > plane.getChairsByRows()) {
+        if (this.seat > plane.getSeatsByRows()) {
             throw new SeatNotExistInPlaneException();
         }
     }
@@ -118,13 +118,13 @@ public class Passenger {
     }
 
     public double priorityOut() {
-        int totalPriority = Math.abs(this.seat - plane.getChairsByRows() / 2);
-        if (plane.getChairsByRows() % 2 == 0) {
-            if (this.seat > plane.getChairsByRows() / 2) {
+        double totalPriority = Math.abs(this.seat - Math.ceil(((double) plane.getSeatsByRows() / 2)));
+        if (plane.getSeatsByRows() % 2 == 0) {
+            if (this.seat > plane.getSeatsByRows() / 2) {
                 totalPriority = totalPriority - 1;
             }
         }
-        return this.row - Math.abs((((double) totalPriority / 100) - 1) / 10) - Math.abs((((double) this.entryOrder / 100) - 1) / 100);
+        return this.row - Math.abs(((totalPriority / 100) - 1) / 10)- Math.abs((((double) this.entryOrder / 100) - 1) / 1000);
         //filas                    //silla                        //Orden de llegada
     }
 

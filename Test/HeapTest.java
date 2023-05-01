@@ -16,18 +16,25 @@ public class HeapTest {
     }
 
     public void setup2() throws Exception {
-        heap.insertPassenger(new Passenger("56453", "Javier", 5461, 65, plane, 10, 3), 15);
-        heap.insertPassenger(new Passenger("98486", "Lina", 4865, 18, plane, 1, 4), 12);
-        heap.insertPassenger(new Passenger("34636", "Daniel", 1654, 25, plane, 3, 2), 20);
+        heap.insertPassenger(new Passenger("56453", "Amy", 5461, 23, plane, 11, 1), 15);
+        heap.insertPassenger(new Passenger("98486", "Sebástian", 4894, 78, plane, 12, 4), 12);
+        heap.insertPassenger(new Passenger("34636", "Facundo", 7696, 45, plane, 8, 4), 20);
     }
     @Test
     public void validateInsertPassengerInHeap()throws Exception{
         //Arrange
         setup1();
         //Act
-        heap.insertPassenger(new Passenger("56540", "Mauricio", 5464, 70, plane, 12, 3), 18);
+        heap.insertPassenger(new Passenger("56540", "Mauricio", 5464, 40, plane, 12, 3), 18);
         //Assert
         assertEquals(heap.getHeapsize(),1);
+    }
+    @Test
+    public void validateRoot() throws Exception {
+        //Arrange
+        setup2();
+        //Act and Assert
+        assertEquals(heap.getRoot().getName(),"Facundo");
     }
     @Test
     public void validateRootNull(){
@@ -49,7 +56,22 @@ public class HeapTest {
         //Arrange
         setup2();
         //Act and Assert
-        assertEquals(heap.extract().getName(),"Daniel");
+        assertEquals(heap.extract().getName(),"Facundo");
+    }
+    @Test
+    public void validateExtractingHeapWithoutRoot(){
+        //Arrange
+        setup1();
+        //Act
+        boolean result=false;
+        try{
+            heap.extract();
+            result=true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //Assert
+        assertFalse(result);
     }
 }
 

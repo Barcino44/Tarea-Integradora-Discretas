@@ -33,7 +33,7 @@ public class AirLine {
         String content = "";
         while ((line = reader.readLine()) != null) {
             arr = line.split("::");
-            if (Integer.parseInt(arr[4]) <= thePlane.getRows()&&Integer.parseInt(arr[5])<= thePlane.getChairsByRows()) {
+            if (Integer.parseInt(arr[4]) <= thePlane.getRows()&&Integer.parseInt(arr[5])<= thePlane.getSeatsByRows()) {
                 HTpassengers.insert(
                         arr[0], new Passenger(arr[0], arr[1], Integer.parseInt(arr[2]), Integer.parseInt(arr[3]), thePlane, Integer.parseInt(arr[4]),Integer.parseInt(arr[5])));
             }
@@ -71,14 +71,14 @@ public class AirLine {
     }
     public void showEntry() throws Exception {
         int counter=0;
-        while (PQpassengersIn.getHeapSize() != 0&&thePlane.getChairsByRows()* thePlane.getRows()>counter) {
+        while (PQpassengersIn.getHeapSize() != 0&&thePlane.getSeatsByRows()* thePlane.getRows()>counter) {
             counter++;
             EntryOrder=EntryOrder+PQpassengersIn.extract().toString()+"\n";
         }
     }
     public void toStack() throws Exception {
         int counter=0;
-        while (PQpassengersOut.getHeapSize() != 0&&thePlane.getChairsByRows()* thePlane.getRows()>counter) {
+        while (PQpassengersOut.getHeapSize() != 0&&thePlane.getSeatsByRows()* thePlane.getRows()>counter) {
             StackpassengerOut.push(PQpassengersOut.extract());
             counter++;
         }

@@ -27,7 +27,7 @@ public class StackTest {
         assertEquals(stack.top().getName(),"Dayana");
     }
     @Test
-    public void valdatePushStack() throws Exception {
+    public void validatePushStack() throws Exception {
         //Arrange
         setup2();
         //Act

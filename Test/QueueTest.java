@@ -45,6 +45,13 @@ public class QueueTest {
         assertEquals(queue.front().getName(),"Lina");
     }
     @Test
+    public void validateEmptyQueue(){
+        //Arrange
+        setup1();
+        //Act and Assert
+        assertTrue(queue.isEmpty());
+    }
+    @Test
     public void validateDequeueEmptyQueue() throws QueueException {
         //Arrange
         boolean result=false;
